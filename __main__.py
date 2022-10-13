@@ -1,4 +1,8 @@
-import Director from director
+from game.director import Director
 
-game = Director
-game.startgame()
+def main():
+    game = Director
+    game.startgame()
+
+if __name__ == "__main__":
+    main()
