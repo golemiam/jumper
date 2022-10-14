@@ -32,4 +32,4 @@ To find more information, you can see the base code in the repository at https:/
     Helaman Cristian Pinheiro Ewerton - 
     Lorenzo Tarati - 
     Marc Rollins - provided code for director.py and __main__.py
-    Robbie Platt -
+    Robbie Platt - provided code for art.py
