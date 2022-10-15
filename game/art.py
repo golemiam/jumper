@@ -2,8 +2,8 @@ import turtle
     
 _t = turtle.Turtle()
 
-class draw_shapes:
-    def draw_circle(_t, _x, _y, radius, extent, fillcolor, pencolor):
+class Draw_shapes:
+    def draw_circle(self, _t, _x, _y, tilt, radius, extent, fillcolor, pencolor):
         """
         This is the atomic shape circle used for the ball on the sword and the shield in various places throughout.
         _x, and _y are for coordinates
@@ -11,16 +11,17 @@ class draw_shapes:
         fillcolor is for the color inside of the circles
         pencolor is for the circle borders
         """
-        _t.color(pencolor, fillcolor)
-        _t.begin_fill()
         _t.up()
         _t.goto(_x,_y)
+        _t.setheading(tilt)
         _t.down()
+        _t.color(pencolor, fillcolor)
+        _t.begin_fill()
         _t.circle(radius, extent)
         _t.end_fill()
         _t.speed(0)
 
-    def draw_rectangle(_t, _x, _y, height, width, tilt, fillcolor, pencolor):
+    def draw_rectangle(self, _t, _x, _y, height, width, tilt, fillcolor, pencolor):
         """
         Atomic shape used primarily for the hilt of the sword.
         _x, and _y are for coordinates
@@ -45,33 +46,14 @@ class draw_shapes:
         _t.end_fill()
         _t.up()
 
-    def draw_line(_t, _x, _y, length):
+    def draw_line(self, _t, _x, _y, length, tilt):
         _t.setheading(tilt)
         _t.up()
         _t.goto(_x, _y)
         _t.down()
+        _t.setheading(tilt)
         _t.forward(length)
-        
-class Full_image:
-    def __init__(self):
-        self.wires = Wires()
-        self.person = Person()
-        self.chute = Chute()
 
-    def draw_image(self):
-        Wires()
-        Person()
-        Chute()
-
-class Chute:
-    """
-    draws the parachute top
-    """
-    def half_circle(self):
-        """
-        draws the half circles used to make the parachute.
-        """
-        draw_circle(_t, _x, _y, radius, extent, fillcolor, pencolor)
 class Wires:
     def line(self, _t, x, y, length, tilt):
         """
@@ -83,18 +65,7 @@ class Wires:
         _t.setheading(tilt)
         _t.forward(length)
 
-class Person:
-    def __init__(self):
-        self.circle = draw_circle()
-    def head():
-        """
-        """
-    def arm(self):
-        """
-        """
-    def leg(self):
-        """
-        """
+
 
 
 
@@ -104,9 +75,20 @@ class Person:
         
         
 Wires.line("self", _t, 0, 0, 110, 30)
+Draw_shapes.draw_circle("self", _t, 95, 55, 60, 23, 180, "pink", "black")
 Wires.line("self", _t, 0, 0, 100, 55)
+Draw_shapes.draw_circle("self", _t, 55, 79, 75, 20, 180, "blue", "black")
 Wires.line("self", _t, 0, 0, 90, 80)
+Draw_shapes.draw_circle("self", _t, 15, 88, 95, 19, 180, "orange", "black")
 Wires.line("self", _t, 0, 0, 90, 105)
+Draw_shapes.draw_circle("self", _t, -24, 86, 105, 20, 180, "green", "black")
 Wires.line("self", _t, 0, 0, 100, 130)
+Draw_shapes.draw_circle("self", _t, -64, 75, 130, 23, 180, "yellow", "black")
 Wires.line("self", _t, 0, 0, 110, 155)
 
+Draw_shapes.draw_circle("self", _t, 13, -4, 143, 21, 360, "purple", "black")
+Draw_shapes.draw_rectangle("self", _t, 10, -42, 40, 20, 180, "teal", "black")
+Draw_shapes.draw_line("self", _t, 10, -42, 50, 30)
+Draw_shapes.draw_line("self", _t, -10, -42, 50, 155)
+Draw_shapes.draw_line("self", _t, 10, -82, 50, 30)
+Draw_shapes.draw_line("self", _t, -10, -82, 50, 155)
