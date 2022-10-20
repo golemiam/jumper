@@ -18,9 +18,9 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self.guess = ""
-        self.is_playing = True
-        self.puzzle_word = ""
+        self._guess = ""
+        self._is_playing = True
+        self._puzzle_word = ""
         
     def start_game(self):
         """Starts the game.
@@ -28,9 +28,9 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if not self.is_playing:
+        if not self._is_playing:
             return
-        while self.is_playing:
+        while self._is_playing:
             self.prompt_player()
             self.update_values()
             self.print_values()
@@ -42,7 +42,7 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if not self.is_playing:
+        if not self._is_playing:
             return
     
     def update_values(self):
@@ -65,15 +65,15 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if not self.is_playing:
+        if not self._is_playing:
             return
         restart_game = str(input("Would you like to play again?\n('yes' or 'no') "))
         if restart_game == "yes":
             self.start_game()
         elif restart_game == "no":
-            self.is_playing = False
+            self._is_playing = False
             return
         else:
             print("Sorry. That input wasn't accepted.")
-            self.is_playing = False
+            self._is_playing = False
             return
