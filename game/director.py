@@ -1,5 +1,11 @@
 # filename: director.py
 # Team 7am
+import random
+import turtle
+from art import Draw_shapes
+from art import Wires
+from art import mistakes_count
+
 
 class Director:
     """ A person who directs the game.
@@ -21,7 +27,9 @@ class Director:
         self._guess = ""
         self._is_playing = True
         self._puzzle_word = ""
-        
+    
+   
+
     def start_game(self):
         """Starts the game.
 
@@ -31,6 +39,7 @@ class Director:
         if not self._is_playing:
             return
         while self._is_playing:
+            self.chooseWord()
             self.prompt_player()
             self.update_values()
             self.print_values()
@@ -42,6 +51,10 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        if mistakes < 6:
+            self._is_playing = True
+        else:
+            self._is_playing = False
         if not self._is_playing:
             return
     
@@ -77,3 +90,5 @@ class Director:
             print("Sorry. That input wasn't accepted.")
             self._is_playing = False
             return
+    
+
