@@ -2,10 +2,8 @@
 # Team 7am
 import random
 import turtle
-from art import Draw_shapes
-from art import Wires
-from art import mistakes_count
-
+from game.art import Draw_shapes, Wires, mistakes_count
+from game.jumper import Jumper
 
 class Director:
     """ A person who directs the game.
@@ -16,7 +14,8 @@ class Director:
         
         guess(string): a lettler in the puzzle guessed by the player.
         is_playing(boolean): A value of True or False, defining whether the player is still playing.
-        puzzle_word(string): A secret word randomly chosen from a list.
+        mistakes(int): An integer representing the number of failed guesses the player has.
+        jumper(class): An instance of the Jumper class.
     """
     def __init__(self):
         """Constructs a new Director.
@@ -24,9 +23,11 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._guess = ""
+        self.guess = ""
         self._is_playing = True
-        self._puzzle_word = ""
+        self.mistakes = 0
+        self.jumper = Jumper
+        self.see_rules = True
     
    
 
@@ -39,11 +40,9 @@ class Director:
         if not self._is_playing:
             return
         while self._is_playing:
-            self.chooseWord()
             self.prompt_player()
-            self.update_values()
             self.print_values()
-        self.continue_game()
+            self.continue_game()
 
     def prompt_player(self):
         """Prompts the player for inputs.
@@ -51,26 +50,27 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if mistakes < 6:
-            self._is_playing = True
-        else:
-            self._is_playing = False
         if not self._is_playing:
             return
-    
-    def update_values(self):
-        """Updates the puzzle, guess count, and visible letters.
-        
-        Args:
-            self (Director): an instance of Director.
-        """
-    
+        if self.see_rules:
+            rules = input("Welcome to Jumper!\nWould you like to see the rules? \n(yes or no) >")
+            if rules.lower == "yes":
+                print("\nYou will be given a random word to guess one letter at a time.")
+                print("You will be able to guess until you discover the entire word or you run out of trys.")
+                print("Good luck.\n")
+                self.see_rules == False
+
+        self.guess = input("Guess a letter [a-z]: ")
+
+
     def print_values(self):
         """Displays the puzzle graphics.
         
         Args:
             self (Director): an instance of Director.
         """
+        print()
+        print(self.jumper.update_blank_string(self, self.guess))
 
     def continue_game(self):
         """Asks the user if they would like to play again.
