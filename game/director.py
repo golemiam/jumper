@@ -24,12 +24,10 @@ class Director:
             self (Director): an instance of Director.
         """
         self.guess = ""
-        self._is_playing = True
+        self.is_playing = True
+        self._letters = Jumper._letters
         self.mistakes = 0
         self.jumper = Jumper
-        self.see_rules = True
-    
-   
 
     def start_game(self):
         """Starts the game.
@@ -37,12 +35,21 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if not self._is_playing:
+        if not self.is_playing:
             return
-        while self._is_playing:
+            
+        rules = input("Welcome to Jumper!\nWould you like to see the rules? \n(yes or no) >")
+        if rules.lower == "yes":
+            print("\nYou will be given a random word to guess one letter at a time.")
+            print("You will be able to guess until you discover the entire word or you run out of trys.")
+            print("Have fun!\n")
+        
+        self.print_values()
+        while self.is_playing:
             self.prompt_player()
             self.print_values()
-            self.continue_game()
+
+        self.continue_game()
 
     def prompt_player(self):
         """Prompts the player for inputs.
@@ -50,15 +57,8 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if not self._is_playing:
+        if not self.is_playing:
             return
-        if self.see_rules:
-            rules = input("Welcome to Jumper!\nWould you like to see the rules? \n(yes or no) >")
-            if rules.lower == "yes":
-                print("\nYou will be given a random word to guess one letter at a time.")
-                print("You will be able to guess until you discover the entire word or you run out of trys.")
-                print("Good luck.\n")
-                self.see_rules == False
 
         self.guess = input("Guess a letter [a-z]: ")
 
@@ -70,7 +70,10 @@ class Director:
             self (Director): an instance of Director.
         """
         print()
-        print(self.jumper.update_blank_string(self, self.guess))
+        jumper = self.jumper
+        print(jumper.update_blank_string(self, self.guess))
+        mistakes = self.mistakes
+        mistakes_count(mistakes)
 
     def continue_game(self):
         """Asks the user if they would like to play again.
@@ -78,17 +81,17 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        if not self._is_playing:
+        if not self.is_playing:
             return
         restart_game = str(input("Would you like to play again?\n('yes' or 'no') "))
         if restart_game == "yes":
             self.start_game()
         elif restart_game == "no":
-            self._is_playing = False
+            self.is_playing = False
             return
         else:
             print("Sorry. That input wasn't accepted.")
-            self._is_playing = False
+            self.is_playing = False
             return
     
 

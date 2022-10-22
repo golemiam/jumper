@@ -1,7 +1,7 @@
 import random
 
 class Word:
-    """ A word for the game
+    """A word for the game
 
     Word is responsible for generating the word.
 
@@ -24,15 +24,15 @@ class Word:
         self._words = ["Cheese", "Monkey", "Brigham", "Young", "University", 
             "incredible", "Fancy", "Palisade", "Xylem", "Phloem"]
         self._word = random.choice(self._words)
+        
         return self._word
 
     def check_guess(self, player_choice):
         """
         """
-        players_choice = self._guess
+        player_choice = self._guess
         if(player_choice in self._word):
             return True
         else:
             mistakes = mistakes + 1
             return False
-  

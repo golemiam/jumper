@@ -9,16 +9,16 @@ class Jumper:
         _letters(string): a string containing the letters in a word.
         _word_length(string): the number of letters in the word that the player is trying to guess.
         """
-    def __init__(self, word_length) -> None:
+    def __init__(self):
         """Constructs a new Jumper.
 
         Args:
             self (Jumper): an instance of Jumper.
-            word_length(int): the length of the word as an integer.
         """
-        self._word = Word.create_word
-        self._letters = list(self._word)
-        self._word_length = word_length
+        self._word = Word.create_word("self")
+        letters_list = list(self._word)
+        self._letters = letters_list
+        self._word_length = len(self._word)
         self._blank_string = self.create_blank_string(self, self._word_length)
         pass
 
@@ -36,7 +36,6 @@ class Jumper:
             blank_string.append(blank)
         return blank_string
 
-    
     def update_blank_string(self, player_guess):
         """Updates the blanks in a string with letters from successful guesses.
 
@@ -45,7 +44,7 @@ class Jumper:
             blank_string(string): a string comprised of blanks and successfully guessed letters.
             player_guess(string): a letter that the player guessed.
         """
-        letters = list(self._word)
+        letters = self._letters
         blank_string = self._blank_string
         for blank in blank_string:
             for letter in letters:
