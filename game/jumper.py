@@ -15,11 +15,13 @@ class Jumper:
         Args:
             self (Jumper): an instance of Jumper.
         """
-        self._word = Word.create_word("self")
+        self._word = Word().create_word()
         letters_list = list(self._word)
         self._letters = letters_list
+        self.mistakes_count = -1
         self._word_length = len(self._word)
-        self._blank_string = self.create_blank_string(self, self._word_length)
+        self._blank_string = self.create_blank_string(self._word_length)
+        self.game_win = False
         pass
 
     def create_blank_string(self, word_length):
@@ -29,11 +31,13 @@ class Jumper:
             self (Jumper): an instance of Jumper.
             word_length: an integer equal to the number of letters in the word.
         """
-        blank = " _"
+        blank = "_"
         blank_string = []
         self._word_length = word_length
-        for _ in word_length:
+        x = self._word_length
+        while x != 0:
             blank_string.append(blank)
+            x -= 1
         return blank_string
 
     def update_blank_string(self, player_guess):
@@ -45,12 +49,20 @@ class Jumper:
             player_guess(string): a letter that the player guessed.
         """
         letters = self._letters
-        blank_string = self._blank_string
-        for blank in blank_string:
-            for letter in letters:
-                if player_guess == letter:
-                    blank_string[blank] =+ player_guess
-                else:
-                    blank_string[blank] =+ "_ "
-
-        self._blank_string = blank_string
+        new_blank_string = []
+        
+        for letter in letters:
+            if player_guess == letter:
+                new_blank_string.append(letter)
+            elif letter in self._blank_string:
+                new_blank_string.append(letter)
+            elif player_guess != letter:
+                new_blank_string.append("_")
+            else:
+                new_blank_string.append("_")
+        if new_blank_string == self._blank_string:
+            self.mistakes_count += 1
+        if new_blank_string == letters:
+            self.game_win = True
+        self._blank_string = new_blank_string
+        return self._blank_string

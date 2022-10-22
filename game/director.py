@@ -25,9 +25,8 @@ class Director:
         """
         self.guess = ""
         self.is_playing = True
-        self._letters = Jumper._letters
-        self.mistakes = 0
-        self.jumper = Jumper
+        self.jumper = Jumper()
+        self.mistakes = self.jumper.mistakes_count
 
     def start_game(self):
         """Starts the game.
@@ -39,17 +38,18 @@ class Director:
             return
             
         rules = input("Welcome to Jumper!\nWould you like to see the rules? \n(yes or no) >")
-        if rules.lower == "yes":
+        if rules.lower() == "yes":
             print("\nYou will be given a random word to guess one letter at a time.")
             print("You will be able to guess until you discover the entire word or you run out of trys.")
             print("Have fun!\n")
         
-        self.print_values()
         while self.is_playing:
-            self.prompt_player()
             self.print_values()
-
-        self.continue_game()
+            self.prompt_player()
+            if self.mistakes == 6:
+                self.continue_game()
+            if self.jumper.game_win:
+                self.continue_game()
 
     def prompt_player(self):
         """Prompts the player for inputs.
@@ -59,8 +59,8 @@ class Director:
         """
         if not self.is_playing:
             return
-
-        self.guess = input("Guess a letter [a-z]: ")
+        if not self.jumper.game_win:
+                self.guess = input("Guess a letter [a-z]: ").lower()
 
 
     def print_values(self):
@@ -71,9 +71,11 @@ class Director:
         """
         print()
         jumper = self.jumper
-        print(jumper.update_blank_string(self, self.guess))
-        mistakes = self.mistakes
-        mistakes_count(mistakes)
+        hidden_word = jumper.update_blank_string(self.guess)
+        print(" ".join(str(x) for x in hidden_word))
+        print()
+        self.mistakes = self.jumper.mistakes_count
+        mistakes_count(self.mistakes)
 
     def continue_game(self):
         """Asks the user if they would like to play again.
@@ -94,4 +96,3 @@ class Director:
             self.is_playing = False
             return
     
-

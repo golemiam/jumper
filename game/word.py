@@ -21,18 +21,8 @@ class Word:
         Args:
             self (Word): an instance of Word.
         """
-        self._words = ["Cheese", "Monkey", "Brigham", "Young", "University", 
-            "incredible", "Fancy", "Palisade", "Xylem", "Phloem"]
+        self._words = ["cheese", "monkey", "brigham", "young", "university", 
+            "incredible", "fancy", "palisade", "xylem", "phloem"]
         self._word = random.choice(self._words)
         
         return self._word
-
-    def check_guess(self, player_choice):
-        """
-        """
-        player_choice = self._guess
-        if(player_choice in self._word):
-            return True
-        else:
-            mistakes = mistakes + 1
-            return False
