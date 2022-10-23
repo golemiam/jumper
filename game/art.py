@@ -67,10 +67,11 @@ class Wires:
 
 
 
+class reset:
+    def resets(self):
+        Draw_shapes.draw_rectangle("self", _t, -200, -200, 400, 400, 0, "white", "white")
 
-
-
-
+reset.resets("self")
 def mistakes_count(mistakes):
         
     if mistakes == 0:        
