@@ -60,7 +60,10 @@ class Director:
         if not self.is_playing:
             return
         if not self.jumper.game_win:
+                if(len(self.jumper.getChosenList())>=1):
+                    print(self.jumper.strChosenList())
                 self.guess = input("Guess a letter [a-z]: ").lower()
+                self.jumper.addChosenList(self.guess)
 
 
     def print_values(self):

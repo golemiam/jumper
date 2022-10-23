@@ -22,6 +22,8 @@ class Jumper:
         self._word_length = len(self._word)
         self._blank_string = self.create_blank_string(self._word_length)
         self.game_win = False
+        self._chosen_letters = list()
+        
         pass
 
     def create_blank_string(self, word_length):
@@ -60,9 +62,23 @@ class Jumper:
                 new_blank_string.append("_")
             else:
                 new_blank_string.append("_")
+        
         if new_blank_string == self._blank_string:
             self.mistakes_count += 1
         if new_blank_string == letters:
             self.game_win = True
         self._blank_string = new_blank_string
         return self._blank_string
+    
+    def getChosenList(self):
+        return self._chosen_letters
+    
+    def addChosenList(self, chosen_letters):
+        if chosen_letters not in self._chosen_letters:
+            self._chosen_letters.append(chosen_letters)
+    
+    def strChosenList(self):
+        printLetters = "Chosen letters: "
+        for each in self._chosen_letters:
+            printLetters = printLetters + " " + each
+        return printLetters
