@@ -2,7 +2,7 @@
 # Team 7am
 import random
 import turtle
-from game.art import Draw_shapes, Wires, mistakes_count
+from game.art import Draw_shapes, Wires, mistakes_count, reset
 from game.jumper import Jumper
 
 class Director:
@@ -26,6 +26,7 @@ class Director:
         self.guess = ""
         self.is_playing = True
         self.jumper = Jumper()
+        self.reset = reset()
         self.mistakes = self.jumper.mistakes_count
 
     def start_game(self):
@@ -77,6 +78,7 @@ class Director:
         hidden_word = jumper.update_blank_string(self.guess)
         print(" ".join(str(x) for x in hidden_word))
         print()
+        reset.resets("self")
         self.mistakes = self.jumper.mistakes_count
         mistakes_count(self.mistakes)
 
